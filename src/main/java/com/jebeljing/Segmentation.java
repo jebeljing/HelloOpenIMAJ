@@ -7,6 +7,8 @@ import org.openimaj.image.colour.ColourSpace;
 import org.openimaj.image.connectedcomponent.GreyscaleConnectedComponentLabeler;
 import org.openimaj.image.pixel.ConnectedComponent;
 import org.openimaj.image.processor.PixelProcessor;
+import org.openimaj.image.segmentation.FelzenszwalbHuttenlocherSegmenter;
+import org.openimaj.image.segmentation.SegmentationUtilities;
 import org.openimaj.image.typography.hershey.HersheyFont;
 import org.openimaj.ml.clustering.FloatCentroidsResult;
 import org.openimaj.ml.clustering.assignment.HardAssigner;
@@ -42,20 +44,41 @@ public class Segmentation {
         input.processInplace(new PixelProcessor<Float[]>() {
             @Override
             public Float[] processPixel(Float[] floats) {
-
-                int centroid = assigner.assign(new float[2]);
-                return centroids[centroid];
+                float[] tmp = new float[3];
+                tmp[0] = floats[0];
+                tmp[1] = floats[1];
+                tmp[2] = floats[2];
+                int centroid = assigner.assign(tmp);
+                float[] centroid1 = centroids[centroid];
+                Float[] result = new Float[3];
+                result[0] = centroid1[0];
+                result[1] = centroid1[1];
+                result[2] = centroid1[2];
+                return result;
             }
         });
+
+
         input = ColourSpace.convert(input, ColourSpace.RGB);
         DisplayUtilities.display(input);
 
-        GreyscaleConnectedComponentLabeler labeler = new GreyscaleConnectedComponentLabeler();
-        List<ConnectedComponent> components = labeler.findComponents(input.flatten());
-
+//        GreyscaleConnectedComponentLabeler labeler = new GreyscaleConnectedComponentLabeler();
+//        List<ConnectedComponent> components = labeler.findComponents(input.flatten());
+//
         int i = 0;
-        for (ConnectedComponent comp: components) {
-            if (comp.calculateArea() < 300) {
+//        for (ConnectedComponent comp: components) {
+//            if (comp.calculateArea() < 300) {
+//                continue;
+//            }
+//            input.drawText(""+(i++), comp.calculateCentroidPixel(), HersheyFont.TIMES_MEDIUM, 40);
+//        }
+//        DisplayUtilities.display(input);
+
+        FelzenszwalbHuttenlocherSegmenter segmenter = new FelzenszwalbHuttenlocherSegmenter();
+        List<ConnectedComponent> components1 = segmenter.segment(input);
+        SegmentationUtilities.renderSegments(input, components1);
+        for (ConnectedComponent comp: components1) {
+            if (comp.calculateArea() < 500) {
                 continue;
             }
             input.drawText(""+(i++), comp.calculateCentroidPixel(), HersheyFont.TIMES_MEDIUM, 40);
