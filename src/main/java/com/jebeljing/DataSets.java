@@ -1,17 +1,17 @@
 package com.jebeljing;
 
 import org.apache.commons.vfs2.FileSystemException;
-import org.openimaj.data.dataset.VFSGroupDataset;
-import org.openimaj.data.dataset.VFSListDataset;
-import org.openimaj.image.DisplayUtilities;
-import org.openimaj.image.FImage;
-import org.openimaj.image.Image;
-import org.openimaj.image.ImageUtilities;
+import org.openimaj.data.dataset.*;
+import org.openimaj.image.*;
+import org.openimaj.image.dataset.BingImageDataset;
 import org.openimaj.image.dataset.FlickrImageDataset;
 import org.openimaj.util.api.auth.DefaultTokenFactory;
+import org.openimaj.util.api.auth.common.BingAPIToken;
 import org.openimaj.util.api.auth.common.FlickrAPIToken;
 
 import java.util.Map;
+
+import static org.openimaj.data.dataset.MapBackedDataset.of;
 
 /**
  * Created by jingshanyin on 4/14/18.
@@ -35,7 +35,9 @@ public class DataSets {
 //                ImageUtilities.FIMAGE_READER);
 //        for (final Map.Entry<String, VFSListDataset<FImage>> entry: groupedFaces.entrySet()) {
 //            DisplayUtilities.display(entry.getKey(), entry.getValue());
+//            DisplayUtilities.display(entry.getValue().getRandomInstance(), "A random image per person");
 //        }
+
 
         //Sometimes, it can be useful to be able to dynamically create a dataset of images from the web.
         // In the image analysis community, Flickr is often used as a source of tagged images for performing activities
@@ -49,7 +51,13 @@ public class DataSets {
         dd19f9bdc61cbcc1
          */
         FlickrAPIToken flickrToken = DefaultTokenFactory.get(FlickrAPIToken.class);
-        FlickrImageDataset<FImage> cats = FlickrImageDataset.create(ImageUtilities.FIMAGE_READER, flickrToken, "cat", 10);
-        DisplayUtilities.display("Cats", cats);
+//        FlickrImageDataset<FImage> cats = FlickrImageDataset.create(ImageUtilities.FIMAGE_READER, flickrToken, "cat", 10);
+//        DisplayUtilities.display("Cats", cats);
+
+        //BingImageDataset
+//        BingAPIToken bingAPIToken = DefaultTokenFactory.get(BingAPIToken.class);
+//        BingImageDataset<FImage> dogs = BingImageDataset.create(ImageUtilities.FIMAGE_READER, bingAPIToken, "dog", 10);
+//        DisplayUtilities.display("Dogs", dogs);
+
     }
 }
