@@ -56,9 +56,9 @@ public class Faces {
                     fImages.drawShapeFilled(new Ellipse(pt.getX(), pt.getY(), 5f, 2.5f, 0f), RGBColour.WHITE);
                     fImages.drawShapeFilled(new Ellipse(pt.getX() - 20f, pt.getY() - 10f, 8f, 4f, 0f), RGBColour.WHITE);
                     fImages.drawShapeFilled(new Ellipse(pt.getX() - 40f, pt.getY() - 30f, 12f, 8f, 0f), RGBColour.WHITE);
-                    fImages.drawShapeFilled(new Ellipse(pt.getX() - 80f, pt.getY() - 60f, 20f, 15f, 0f), RGBColour.WHITE);
-                    fImages.drawText("OpenIMAJ is", (int)pt.getX() - 80, (int)pt.getY() - 60, HersheyFont.ASTROLOGY, 10, RGBColour.BLACK);
-                    fImages.drawText("Awesome", (int)pt.getX() - 70, (int)pt.getY() - 50, HersheyFont.ASTROLOGY, 10, RGBColour.BLACK);
+                    fImages.drawShapeFilled(new Ellipse(pt.getX() - 80f, pt.getY() - 60f, 40f, 25f, 0f), RGBColour.WHITE);
+                    fImages.drawText("OpenIMAJ is", (int)pt.getX() - 110, (int)pt.getY() - 60, HersheyFont.ASTROLOGY, 10, RGBColour.BLACK);
+                    fImages.drawText("Awesome", (int)pt.getX() - 110, (int)pt.getY() - 50, HersheyFont.ASTROLOGY, 10, RGBColour.BLACK);
                 }
             }
         });
